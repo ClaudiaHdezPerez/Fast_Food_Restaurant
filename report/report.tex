@@ -1,0 +1,118 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{hyperref}
+\usepackage{graphicx}
+
+\title{Simulación de Sistemas de Colas en Restaurantes de Comida Rápida}
+\author{Claudia Hernández Pérez}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\
+
+\
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\textwidth]{./images/restaurant.jpg}
+\end{figure}
+
+\newpage
+
+\tableofcontents
+
+\newpage
+
+\section{Introducción}\label{sec:introduccion}
+\subsection{Descripción del proyecto}
+Este proyecto analiza mediante simulación de eventos discretos dos configuraciones de atención en restaurantes de comida rápida: el sistema tradicional de múltiples colas independientes versus el sistema de cola única con múltiples servidores.
+
+\subsection{Objetivos y metas}
+\begin{itemize}
+\item Comparar el tiempo medio de espera en ambos sistemas
+\item Validar teóricamente los resultados mediante teoría de colas
+\item Proponer la configuración óptima para minimizar tiempos de espera
+\end{itemize}
+
+\subsection{Sistema a simular y variables de interés}
+El sistema simulado representa:
+\begin{itemize}
+\item Llegadas de clientes: Proceso Poisson con $\lambda = 60$/hora
+\item Tiempos de servicio: Distribución exponencial con $\mu = 24$/hora por servidor
+\item Variables clave: Tiempo en sistema, longitud de cola, utilización de servidores
+\end{itemize}
+
+\newpage
+
+\section{Detalles de Implementación}\label{sec:implementacion}
+\subsection{Pasos de implementación}
+\begin{enumerate}
+\item Modelado conceptual del sistema
+\item Implementación en Python con SimPy
+\item Validación del modelo teórico (M/M/1 vs M/M/s)
+\item Diseño de experimentos con 1000 horas simuladas
+\item Análisis estadístico de resultados
+\end{enumerate}
+
+\newpage
+
+\section{Resultados y Experimentos}\label{sec:resultados}
+\subsection{Hallazgos principales}
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\textwidth]{./images/comparacion_colas.png}
+\caption{Comparación de tiempos medios en sistema}
+\label{fig:resultados}
+\end{figure}
+
+\subsection{Interpretación}
+Como muestra la Figura \ref{fig:resultados}, el sistema de cola única reduce el tiempo medio de espera en un 58\% respecto al sistema tradicional.
+
+\subsection{Hipótesis validadas}
+\begin{itemize}
+\item La cola única provee menor varianza en tiempos de espera
+\item La utilización de servidores se mantiene constante en ambos casos ($\rho = 83.33\%$)
+\end{itemize}
+
+\newpage
+
+\section{Modelo Matemático}\label{sec:modelo}
+\subsection{Modelos probabilísticos}
+Se aplicó teoría de colas Markovianas:
+\begin{itemize}
+\item M/M/1 para colas independientes
+\item M/M/3 para cola única con 3 servidores
+\end{itemize}
+
+\subsection{Supuestos clave}
+\begin{itemize}
+\item Estado estable ($\lambda < s\mu$)
+\item Disciplina FIFO
+\item Población infinita
+\end{itemize}
+
+\subsection{Validación teórica}
+Los resultados simulados mostraron menos del 2\% de desviación respecto a las predicciones teóricas:
+
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{Métrica} & \textbf{Teórico} & \textbf{Simulado} \\ \hline
+Tiempo M/M/1 & 15.00 min & 15.23 min \\ \hline
+Tiempo M/M/3 & 6.01 min & 6.17 min \\ \hline
+\end{tabular}
+
+\newpage
+
+\section{Conclusiones}\label{sec:conclusiones}
+La simulación demostró que el sistema de cola única ofrece:
+\begin{itemize}
+\item Menor tiempo medio de espera (6.17 vs 15.23 minutos)
+\item Mayor equidad en la atención
+\item Mejor experiencia para los clientes
+\end{itemize}
+
+\end{document}
